@@ -20,7 +20,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="crear_producto.php">CREAR</a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="venta_producto.php">VENTAS</a>
       </li>
     </ul>

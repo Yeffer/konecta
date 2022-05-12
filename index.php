@@ -17,32 +17,35 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="crear_producto.php">CREAR</a>
       </li>
-       <li class="nav-item active">
+       <li class="nav-item">
         <a class="nav-link" href="venta_producto.php">VENTAS</a>
       </li>
     </ul>
   </div>
 </nav>
-  <div id="tableData">  		
+<div class="container" id="productos">
+<br>
+<div class="card">
+  <div class="card-header">LISTA PRODUCTOS</div>
+  <div class="card-body">
+  <div id="tableData"></div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel"><b>Editar producto</b></h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div id="editarForm"></div>
+            </div>
+        </div>   
+    </div>
   </div>
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-      <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h2 class="modal-title" id="exampleModalLabel"><b>Editar producto</b></h2>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div id="editarForm"> 
-               
-            </div>
-          </div>
-      </div>
-  </div> 
 </div>
 <script type="text/javascript" src="assets/js/main.js"></script>
 </body>
