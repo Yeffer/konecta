@@ -51,7 +51,6 @@
 		$(document).on("click",".borrar-btn",function(){
 			if (confirm("¿Estás seguro de eliminar el producto?")) {
 				var id = $(this).data('id');
-				var element = this;
 				$.ajax({
 					url :"borrar.php",
 					type:"POST",
@@ -60,9 +59,11 @@
 					success:function(data){
 						if (data == 1) {
 							$(element).closest("tr").fadeOut();
-							alert("Registro de producto eliminado correctamente");	
+							alert("Registro de producto eliminado correctamente");
+							location.reload();	
 						}else{
 							alert("Identificación de producto inválida");
+							location.reload();
 						}
 					}
 				});
@@ -73,26 +74,25 @@
 		$(document).on("click",".venta-btn",function(){
 			if (confirm("¿Estás seguro que desea vender el producto?")) {
 				var id = $(this).data('id');
-				var cantidad = $(this).data('cantidad');
-				var element = this;
+				var cantidad = $("#cantidad").val();
+				console.log(cantidad);
 				$.ajax({
 					url :"vender.php",
 					type:"POST",
 					cache:false,
-					data:{ventaId:id},
-					data : {ventaId:id,cantidad:cantidad},
+					data: {ventaId:id, cantidad:cantidad},
 					success:function(data){
-						if (data == 1) {
-							$(element).closest("tr").fadeOut();
-							alert("Registro de producto vendido correctamente");	
+						if (data == 1) {							
+							alert("Producto vendido correctamente");	
+							location.reload();
 						}else{
-							alert("Identificación de producto inválida");
+							alert("Cantidad de compra mayor a cantidad productos o menor a cero.");		
+							location.reload();					
 						}
 					}
 				});
 			}
 		});
-
 
 		// Edite el registro a mysqli desde php usando jquery ajax
 		$(document).on("click",".editar-btn",function(){
@@ -107,21 +107,7 @@
 				},
 			});
 		});
-/*
-		// Edite el registro a mysqli desde php usando jquery ajax
-		$(document).on("click",".venta-btn",function(){
-			var id = $(this).data('id');
-			$.ajax({
-				url :"cantidad_venta.php",
-				type:"POST",
-				cache:false,
-				data:{editarId:id},
-				success:function(data){
-					$("#ventaForm").html(data);
-				},
-			});
-		});
-*/
+
 		// User record update to mysqli from php using jquery ajax
 		$(document).on("click","#editarSubmit", function(){
 			var editar_id = $("#editarId").val();
@@ -142,7 +128,8 @@
 						alert("Registro de producto actualizado correctamente");
 						loadTableData();
 					}else{
-						alert("Algo salió mal");	
+						alert("Algo salió mal");
+						location.reload();	
 					}
 				}
 			});
