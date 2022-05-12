@@ -4,7 +4,10 @@
 	require_once('dbcon.php');
 	
 	// extraemos la informacion de la tabla clientes..
-	$sql = "SELECT ID, NOMBRE, REFERENCIA, PRECIO, PESO, CATEGORIA, STOCK, FCH_CREACION FROM productos";	
+	$sql = "SELECT P.ID, P.NOMBRE, P.REFERENCIA, P.PRECIO, P.PESO,  C.NOMBRE AS CATEGORIA, P.STOCK, P.FCH_CREACION
+			FROM productos P
+			INNER JOIN categoria C ON P.ID_CATEGORIA = C.ID
+			ORDER BY P.ID";	
 	$query = $con->query($sql);
 	if ($query->num_rows  > 0) {
 		$output = "";

@@ -8,8 +8,8 @@
     $nombre = str_replace(array("\r","\n"),array(" "," "), $nombre);
     $referencia = filter_var(trim($_POST["referencia"]), FILTER_SANITIZE_STRING);
     $precio = trim($_POST["precio"]);
-    $peso = trim($_POST["peso"]);
-    $categoria = filter_var(trim($_POST["categoria"]), FILTER_SANITIZE_STRING);
+    $peso = trim($_POST["peso"]);    
+    $id_categoria = $_POST["categoria"];
     $cantidad = trim($_POST["stock"]);    
     $fecha = date("Y-m-d H:i:s");  
 
@@ -20,9 +20,9 @@
         $id = $row["MAX_ID"];
     }    
     $id = $id+1;
-        
-    $query = "INSERT INTO productos (ID, NOMBRE, REFERENCIA, PRECIO, PESO, CATEGORIA, STOCK, FCH_CREACION) 
-	VALUES($id, '$nombre', '$referencia', '$precio', '$peso', '$categoria', '$cantidad', '$fecha')";
+
+    $query = "INSERT INTO productos (ID, NOMBRE, REFERENCIA, PRECIO, PESO, STOCK, FCH_CREACION, ID_CATEGORIA) 
+	VALUES($id, '$nombre', '$referencia', $precio, $peso, $cantidad, '$fecha', $id_categoria)";
     
 	if ($con->query($query)) {  
         return true;

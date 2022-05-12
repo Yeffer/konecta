@@ -12,7 +12,7 @@
 	$cantidad = $_POST['cantidad'];
 
 	// SQL para actualizar un registro	
-	$query = "UPDATE productos SET NOMBRE='{$nombre}',REFERENCIA='{$referencia}',PRECIO={$precio},PESO={$peso}, CATEGORIA='{$categoria}', STOCK={$cantidad} WHERE id='{$id}'";	
+	$query = "UPDATE productos SET NOMBRE='{$nombre}',REFERENCIA='{$referencia}',PRECIO={$precio},PESO={$peso}, ID_CATEGORIA='{$categoria}', STOCK={$cantidad} WHERE id='{$id}'";	
 	if ($con->query($query)) {
 		echo 1;
 	}else{

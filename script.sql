@@ -26,6 +26,30 @@ CREATE TABLE ventas(
 );
 
 
+-- Creacion de tablas de categoria
+CREATE TABLE categoria(
+    `ID` INT not null primary key auto_increment,
+    `NOMBRE` VARCHAR(50) NOT NULL,
+    `FCH_CREACION` TIMESTAMP NOT NULL
+);
+
+-- ALTER de id cateegoria
+ALTER TABLE productos
+  ADD COLUMN ID_CATEGORIA INT NOT NULL,
+  ADD CONSTRAINT `FK_CATEGORIA` FOREIGN KEY (ID_CATEGORIA)
+  REFERENCES ventas(id);
+
+-- Creación de categorias
+INSERT INTO categoria (ID, NOMBRE, FCH_CREACION) 
+VALUES(1, 'PAQUETES', '2022-10-11 18:22:32'),
+(2, 'BEBIDA FRIA', '2022-10-11 18:22:32'),
+(3, 'BEBIDA CALIENTE', '2022-10-11 18:22:32'),
+(4, 'LACTEOS', '2022-10-11 18:22:32');
+
+
+--Eliminar columa de categoria en productos
+ALTER TABLE productos DROP COLUMN CATEGORIA;
+
 
 --CONSULTAS ADICIONALES 
 

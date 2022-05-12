@@ -60,7 +60,19 @@
     <div class="form-group row">
       <label class="control-label col-sm-2" for="categoria">Categoría:</label>
       <div class="col-sm-10">          
-        <input type="text" class="form-control" id="categoria" placeholder="Ingrese Categoría" name="categoria">
+        <select class="form-control" id="categoria" aria-label="Default select example">
+        <option value="0">Seleccione...</option> 
+          <?php
+            // incluimos el fichero de conexión
+            require_once('dbcon.php');
+
+            $sql = "SELECT ID, NOMBRE FROM categoria";  
+            $query = $con->query($sql);
+            while ($row = $query->fetch_assoc()) {              
+              echo '<option value="'.$row['ID'].'">'.$row['NOMBRE'].'</option>';
+            }
+          ?>
+        </select>
       </div>
     </div>
     <div class="form-group row">

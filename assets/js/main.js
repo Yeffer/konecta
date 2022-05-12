@@ -29,7 +29,7 @@
 			var peso = $("#peso").val();
 			var categoria = $("#categoria").val();
 			var cantidad = $("#stock").val();
-			 
+
 			if(nombre !=="" && referencia !=="" && precio !=="" && peso !=="" && peso !=="" && cantidad !==""){
 				$.ajax({
 					url : "accion.php",
@@ -57,8 +57,7 @@
 					cache:false,
 					data:{borrarId:id},
 					success:function(data){
-						if (data == 1) {
-							$(element).closest("tr").fadeOut();
+						if (data == 1) {							
 							alert("Registro de producto eliminado correctamente");
 							location.reload();	
 						}else{

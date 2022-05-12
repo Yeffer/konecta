@@ -7,7 +7,11 @@
 	}
 	// extraer tabla clientes..
 	
-	$sql = "SELECT ID, NOMBRE, REFERENCIA, PRECIO, PESO, CATEGORIA, STOCK FROM productos WHERE id = {$editarId}";
+	//$sql = "SELECT ID, NOMBRE, REFERENCIA, PRECIO, PESO, CATEGORIA, STOCK FROM productos WHERE id = {$editarId}";
+
+	$sql = "SELECT P.ID, P.NOMBRE, P.REFERENCIA, P.PRECIO, P.PESO,  C.NOMBRE AS CATEGORIA, P.STOCK, P.FCH_CREACION, C.ID AS ID_CATEGORIA
+			FROM productos P
+			INNER JOIN categoria C ON P.ID_CATEGORIA = C.ID WHERE P.ID = {$editarId}";	
 	$query = $con->query($sql);
 	if ($query->num_rows > 0) {
 		$output = "";
@@ -31,10 +35,23 @@
 												<label class='control-label' for='peso'>Peso:</label>
                             <input type='number' class='form-control' id='editarPeso' value='{$row['PESO']}'>
                         </div>
+
                         <div class='form-group'>
-														<label class='control-label' for='categoria'>Categoria:</label>
-                            <input type='text' class='form-control' id='editarCategoria' value='{$row['CATEGORIA']}'>
-                        </div>
+												<label class='control-label' for='categoria'>Categoria:</label>        
+										        <select class='form-control' id='editarCategoria' aria-label='Default select example'>
+										        <option value='0'>Seleccione...</option>";   
+										          
+										            // incluimos el fichero de conexión
+										            require_once('dbcon.php');
+
+										            $sql = "SELECT ID, NOMBRE FROM categoria";  
+										            $query = $con->query($sql);
+										            while ($row2 = $query->fetch_assoc()) {              
+										              $output .="<option value='{$row2['ID']}'>{$row2['NOMBRE']}</option>";
+										            }
+										          
+										      $output .=" </select>										      
+										    </div>
                          <div class='form-group'>
 														<label class='control-label' for='cantidad'>Cantidad:</label>
                             <input type='number' class='form-control' id='editarCantidad' value='{$row['STOCK']}'>
