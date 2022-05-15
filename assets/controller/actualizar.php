@@ -1,6 +1,6 @@
 <?php
 	// incluimos la conexión
-	include "dbcon.php";
+	include_once('../db/dbcon.php');
 
 	// Variables para editar la tabla por id
 	$id = $_POST['editar_id'];

@@ -18,10 +18,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="crear_producto.php">CREAR</a>
+        <a class="nav-link" href="assets/view/crear_producto.php">CREAR</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="venta_producto.php">VENTAS</a>
+        <a class="nav-link" href="assets/view/venta_producto.php">VENTAS</a>
       </li>
     </ul>
   </div>

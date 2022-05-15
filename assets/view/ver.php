@@ -1,10 +1,10 @@
 <?php
 	// incluimos el fichero de conexión
 
-	require_once('dbcon.php');
+	require_once('../db/dbcon.php');
 	
 	// extraemos la informacion de la tabla clientes..
-	$sql = "SELECT P.ID, P.NOMBRE, P.REFERENCIA, P.PRECIO, P.PESO,  C.NOMBRE AS CATEGORIA, P.STOCK, P.FCH_CREACION, C.ID AS ID_CATEGORIA
+	$sql = "SELECT P.ID, P.NOMBRE, P.REFERENCIA, P.PRECIO, P.PESO,  C.NOMBRE AS CATEGORIA, P.STOCK, P.FCH_CREACION
 			FROM productos P
 			INNER JOIN categoria C ON P.ID_CATEGORIA = C.ID
 			ORDER BY P.ID";	
@@ -18,10 +18,10 @@
 						<th>Nombre</th>
 						<th>Referencia</th>
 						<th>Precio</th>
-						<th>Peso</th>
-						<th>Categoria</th>
-						<th>Cantidad</th>		
-						<th>Comprar</th>
+						<th>Peso Kg</th>
+						<th>Categoría</th>
+						<th>Cantidad</th>						
+						<th>Fecha creación</th>
 					</tr>
 				</thead>";
 		while ($row = $query->fetch_assoc()) {
@@ -34,8 +34,9 @@
 						<td>{$row['PESO']}</td>
 						<td>{$row['CATEGORIA']}</td>
 						<td>{$row['STOCK']}</td>
-						<td><input type='number' class='form-control' id='cantidad' placeholder='Cantidad venta' name='cantidad'></td>
-						<td><button class='btn btn-danger btn-sm venta-btn' data-id='{$row['ID']}'>Vender</button></td>		
+						<td>{$row['FCH_CREACION']}</td>
+						<td><button class='btn btn-success btn-sm editar-btn' data-id='{$row['ID']}' data-toggle='modal' data-target='#exampleModal'>Editar</button></td>						
+						<td><button class='btn btn-danger btn-sm borrar-btn' data-id='{$row['ID']}'>Borrar</button></td>
 					</tr>
 			</tbody>";
 		}

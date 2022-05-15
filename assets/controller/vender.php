@@ -1,6 +1,6 @@
 <?php
 	// declarar la conexión
-	require_once('dbcon.php');
+	include_once('../db/dbcon.php');
 
 	if (isset($_POST['ventaId'])) {
 		$ventaId = $_POST['ventaId'];

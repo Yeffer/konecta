@@ -1,6 +1,6 @@
 <?php
 	// incluimos fichero de conexión
-	require_once('dbcon.php');
+	include_once('../db/dbcon.php');
 
 	if (isset($_POST['editarId'])) {
 		$editarId = $_POST['editarId'];
@@ -42,7 +42,7 @@
 										        <option value='0'>Seleccione...</option>";   
 										          
 										            // incluimos el fichero de conexión
-										            require_once('dbcon.php');
+										            include_once('../db/dbcon.php');
 
 										            $sql = "SELECT ID, NOMBRE FROM categoria";  
 										            $query = $con->query($sql);

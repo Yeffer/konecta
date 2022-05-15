@@ -1,7 +1,7 @@
 <?php
 	// incluimos la conexión a MySQL
 
-	include_once('dbcon.php');
+	include_once('../db/dbcon.php');    
 
 	// variables para insertar datos a mysqli
 	$nombre = strip_tags(trim($_POST["nombre"])); //Retira las etiquitas HTML

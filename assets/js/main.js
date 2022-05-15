@@ -2,7 +2,7 @@
 		// recuperar datos de la tabla productos..
 	   	function loadTableData(){
 	       $.ajax({
-	           url : "ver.php",
+	           url : "assets/view/ver.php",
 	           type : "POST",
 	           success:function(data){
 	              $("#tableData").html(data);
@@ -13,7 +13,7 @@
 	   	// recuperar datos de la tabla productos venta..
 	   	function loadTableDataVenta(){
 	       $.ajax({
-	           url : "venta_ver.php",
+	           url : "../view/venta_ver.php",
 	           type : "POST",
 	           success:function(data){
 	              $("#tableDataVenta").html(data);
@@ -32,7 +32,7 @@
 
 			if(nombre !=="" && referencia !=="" && precio !=="" && peso !=="" && peso !=="" && cantidad !==""){
 				$.ajax({
-					url : "accion.php",
+					url : "../controller/accion.php",
 					type: "POST",
 					cache: false,
 					data : {nombre:nombre,referencia:referencia,precio:precio, peso:peso, categoria:categoria, stock:cantidad},
@@ -52,7 +52,7 @@
 			if (confirm("¿Estás seguro de eliminar el producto?")) {
 				var id = $(this).data('id');
 				$.ajax({
-					url :"borrar.php",
+					url :"assets/controller/borrar.php",
 					type:"POST",
 					cache:false,
 					data:{borrarId:id},
@@ -76,7 +76,7 @@
 				var cantidad = $("#cantidad").val();
 				console.log(cantidad);
 				$.ajax({
-					url :"vender.php",
+					url :"../controller/vender.php",
 					type:"POST",
 					cache:false,
 					data: {ventaId:id, cantidad:cantidad},
@@ -97,7 +97,7 @@
 		$(document).on("click",".editar-btn",function(){
 			var id = $(this).data('id');
 			$.ajax({
-				url :"extraer.php",
+				url :"assets/view/extraer.php",
 				type:"POST",
 				cache:false,
 				data:{editarId:id},
@@ -118,7 +118,7 @@
 			var cantidad = $("#editarCantidad").val();			
 			
 			$.ajax({
-				url:"actualizar.php",
+				url:"assets/controller/actualizar.php",
 				type:"POST",
 				cache:false,
 				data:{editar_id:editar_id,nombre:nombre,referencia:referencia,precio:precio,peso:peso,categoria:categoria,cantidad:cantidad},
