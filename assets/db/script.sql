@@ -2,8 +2,6 @@
 CREATE DATABASE `konecta` /*!40100 COLLATE 'utf8_spanish_ci' */;
 
 
-
-
 -- 01 - Creacion de tablas de categoria
 CREATE TABLE `categoria` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
@@ -43,8 +41,6 @@ CREATE TABLE `ventas` (
   CONSTRAINT `FK_ventas_productos` FOREIGN KEY (`id_productos`) REFERENCES `konecta`.`productos` (`ID`) ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 COLLATE='utf8_spanish_ci';
-
-
 
 
 -- Creación de categorias
