@@ -24,7 +24,7 @@
         <a class="nav-link" href="venta_producto.php">VENTAS</a>
       </li>
       <!--<li class="nav-item">
-        <a class="nav-link" href="categoria.php">CATEGORÍA</a>
+        <a class="nav-link" href="assets/view/categoria.php">CATEGORÍA</a>
       </li>-->
     </ul>
   </div>
@@ -32,7 +32,7 @@
 <div class="container" id="productos">
 <br>
 <div class="card">
-  <div class="card-header">NUEVO PRODUCTO</div>
+  <div class="card-header">NUEVA CATEGORIA</div>
   <div class="card-body">
   
  <form class="form-horizontal" id="clienteForm">

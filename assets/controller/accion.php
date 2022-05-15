@@ -13,13 +13,12 @@
     $cantidad = trim($_POST["stock"]);    
     $fecha = date("Y-m-d H:i:s");  
 
-    $sql = "SELECT IFNULL(MAX(ID), 1) AS MAX_ID FROM productos";
+    $sql = "SELECT IFNULL(MAX(ID), 0) + 1 AS MAX_ID FROM productos";
     $result = $con->query($sql);
 
     while ($row = $result->fetch_assoc()) {
         $id = $row["MAX_ID"];
     }    
-    $id = $id+1;
 
     $query = "INSERT INTO productos (ID, NOMBRE, REFERENCIA, PRECIO, PESO, STOCK, FCH_CREACION, ID_CATEGORIA) 
 	VALUES($id, '$nombre', '$referencia', $precio, $peso, $cantidad, '$fecha', $id_categoria)";

@@ -1,54 +1,58 @@
 -- Creación de Base de Datos
 CREATE DATABASE `konecta` /*!40100 COLLATE 'utf8_spanish_ci' */;
 
--- CREAR TABLA DE PRODUCTOS 
-CREATE TABLE `PRODUCTOS` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
-  `NOMBRE` VARCHAR(150) NOT NULL,
-  `REFERENCIA` VARCHAR(150) NOT NULL,
-  `PRECIO` INT NOT NULL,
-  `PESO` INT NOT NULL,
-  `CATEGORIA` VARCHAR(50) NOT NULL,
-  `STOCK` INT NOT NULL,
-  `FCH_CREACION` TIMESTAMP NOT NULL,
-  PRIMARY KEY (`ID`)
+
+
+
+-- 01 - Creacion de tablas de categoria
+CREATE TABLE `categoria` (
+  `ID` INT(11) NOT NULL AUTO_INCREMENT,
+  `NOMBRE` VARCHAR(50) NOT NULL COLLATE 'utf8_spanish_ci',
+  `DESCRIPCION` VARCHAR(150) NULL DEFAULT NULL COLLATE 'utf8_spanish_ci',
+  `FCH_CREACION` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`) USING BTREE
+)
+COLLATE='utf8_spanish_ci';
+
+-- 02 - CREAR TABLA DE PRODUCTOS 
+CREATE TABLE `productos` (
+  `ID` INT(11) NOT NULL AUTO_INCREMENT,
+  `NOMBRE` VARCHAR(150) NOT NULL COLLATE 'utf8_spanish_ci',
+  `REFERENCIA` VARCHAR(150) NOT NULL COLLATE 'utf8_spanish_ci',
+  `PRECIO` INT(11) NOT NULL,
+  `PESO` INT(11) NOT NULL,
+  `STOCK` INT(11) NOT NULL,
+  `FCH_CREACION` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ID_CATEGORIA` INT(11) NOT NULL,
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `FK_productos_categoria` (`ID_CATEGORIA`) USING BTREE,
+  CONSTRAINT `FK_productos_categoria` FOREIGN KEY (`ID_CATEGORIA`) REFERENCES `konecta`.`categoria` (`ID`) ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 COLLATE='utf8_spanish_ci';
 
 
--- Creación de tabla registro de ventas 
-CREATE TABLE ventas(
-    `id` INT not NULL primary key auto_increment,
-    `id_productos` INT not NULL,
-    `cantidad` INT not NULL,
-    `fch_venta` TIMESTAMP NOT NULL,
-    foreign key (id_productos) references productos(id) on delete cascade on update cascade
-);
+
+-- 03 - Creación de tabla registro de ventas 
+CREATE TABLE `ventas` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_productos` INT(11) NOT NULL,
+  `cantidad` INT(11) NOT NULL,
+  `fch_venta` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `FK_ventas_productos` (`id_productos`) USING BTREE,
+  CONSTRAINT `FK_ventas_productos` FOREIGN KEY (`id_productos`) REFERENCES `konecta`.`productos` (`ID`) ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+COLLATE='utf8_spanish_ci';
 
 
--- Creacion de tablas de categoria
-CREATE TABLE categoria(
-    `ID` INT not null primary key auto_increment,
-    `NOMBRE` VARCHAR(50) NOT NULL,
-    `FCH_CREACION` TIMESTAMP NOT NULL
-);
 
--- ALTER de id cateegoria
-ALTER TABLE productos
-  ADD COLUMN ID_CATEGORIA INT NOT NULL,
-  ADD CONSTRAINT `FK_CATEGORIA` FOREIGN KEY (ID_CATEGORIA)
-  REFERENCES ventas(id);
 
 -- Creación de categorias
-INSERT INTO categoria (ID, NOMBRE, FCH_CREACION) 
-VALUES(1, 'PAQUETES', '2022-10-11 18:22:32'),
-(2, 'BEBIDA FRIA', '2022-10-11 18:22:32'),
-(3, 'BEBIDA CALIENTE', '2022-10-11 18:22:32'),
-(4, 'LACTEOS', '2022-10-11 18:22:32');
-
-
---Eliminar columa de categoria en productos
-ALTER TABLE productos DROP COLUMN CATEGORIA;
+INSERT INTO `categoria` (`ID`, `NOMBRE`, `DESCRIPCION`, `FCH_CREACION`) 
+VALUES (1, 'BEBIDAS FRIAS', 'BEBIDAS', '2022-05-14 21:26:30'),
+(2, 'BEBIDAS CALIENTES', 'BEBIDAS', '2022-05-14 21:26:56'),
+(3, 'LACTEOS', 'LECHE YOGURT', '2022-05-14 21:28:01'),
+(4, 'EMPAQUETADOS', 'GALLETAS, PAQUETES PAPAS, PAQUETES CHITOS', '2022-05-14 21:29:20');
 
 
 --CONSULTAS ADICIONALES 
@@ -60,7 +64,7 @@ WHERE STOCK IN (SELECT MAX(STOCK) FROM productos);
 
 
 -- consulta de ventas que más stock tiene.
-SELECT P.ID, P.NOMBRE, P.REFERENCIA, C.NOMBRE AS CATEGORIA, P.PRECIO, P.PESO, P.STOCK, V.cantidad
+SELECT P.ID, P.NOMBRE, P.REFERENCIA, C.NOMBRE AS CATEGORIA, P.PRECIO, P.PESO, P.STOCK, V.cantidad AS CANTIDAD
 FROM productos P
 INNER JOIN ventas V ON P.ID = V.id_productos
 INNER JOIN categoria C ON P.ID_CATEGORIA = C.ID

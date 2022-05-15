@@ -22,6 +22,9 @@
       <li class="nav-item active">
         <a class="nav-link" href="venta_producto.php">VENTAS</a>
       </li>
+      <!--<li class="nav-item">
+        <a class="nav-link" href="categoria.php">CATEGORÍA</a>
+      </li> -->
     </ul>
   </div>
 </nav>
